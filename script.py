@@ -27,8 +27,25 @@ for scenario in range(len(owls_init)):
         owls.append( owl(owls[time], mouses[time]) )
         mouses.append( mouse(mouses[time], owls[time]) )
     
+    plt.figure(1)
+    #plt.figure(figsize=(10,60))
+    
+    plt.subplot(221)
     plt.plot(owls,mouses,'r')
     plt.xlabel("owls")
     plt.ylabel("mouses")
+    plt.title("owls X mouses")
+    #plt.show()
+    
+    plt.subplot(222)
+    plt.plot(owls,'r')
+    plt.ylabel("owls")
+    #plt.show()
+    plt.subplot(223)
+    plt.plot(mouses,'r')
+    plt.ylabel("mouses")
+    
+    plt.subplots_adjust(top=1.2, bottom=0.08, left=0.15, right=0.95, hspace=0.30,
+                    wspace=0.35)
     plt.show()
     

@@ -5,6 +5,7 @@ Created on Fri May 18 16:16:53 2018
 
 @author: Felipe Rafael de Souza
 """
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 
 #@return new amount of owls 
@@ -28,24 +29,22 @@ for scenario in range(len(owls_init)):
         mouses.append( mouse(mouses[time], owls[time]) )
     
     plt.figure(1)
-    #plt.figure(figsize=(10,60))
-    
-    plt.subplot(221)
+    plt.subplot(121)
     plt.plot(owls,mouses,'r')
     plt.xlabel("owls")
     plt.ylabel("mouses")
     plt.title("owls X mouses")
-    #plt.show()
     
-    plt.subplot(222)
-    plt.plot(owls,'r')
-    plt.ylabel("owls")
-    #plt.show()
-    plt.subplot(223)
-    plt.plot(mouses,'r')
-    plt.ylabel("mouses")
+    plt.subplot(122)
+    line_1, = plt.plot(owls,'r', label='owls')
+    line_2, = plt.plot(mouses,'b', label='mouses')
+    plt.ylabel("number of individuals in population")
+    plt.xlabel("time")
+    plt.legend(handles=[line_1, line_2])
+    plt.axhline(y=0, linewidth=1, color='g')
+    plt.axis([0, 100, 0, 1800])
     
-    plt.subplots_adjust(top=1.2, bottom=0.08, left=0.15, right=0.95, hspace=0.30,
+    plt.subplots_adjust(top=0.9, bottom=0.1, left=0.15, right=0.95, hspace=0.30,
                     wspace=0.35)
     plt.show()
     

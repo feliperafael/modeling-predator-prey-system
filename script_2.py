@@ -10,23 +10,23 @@ import numpy as np
 
 owls_init   = [150, 150, 100, 10, 10]
 mouses_init = [200, 300, 200, 20, 100]
-#owls_coef   = [0.5, 0.6, 0.7, 0.8, 0.9]
-#owls_coef_b   = [0.001, 0.002, 0.003, 0.004]
-#mouses_coef = [1.0, 1.1, 1.2, 1.3, 1.4]
-#owls_coef_b   = [0.0001, 0.001, 0.002, 0.003]
-owls_coef   = [0.7]#np.linspace(0.1,1,10)
+
+owls_coef   = [0.7]
 owls_coef_b   = np.linspace(0.001,0.006,20)
-mouses_coef = [1.2]#np.linspace(1.1,1.5,10)
+mouses_coef = [1.2]
 owls_coef_b   = np.linspace(0.001,0.005,20)
 
-times = 10000
+times = 100
 
 #@return new amount of owls 
 def owl(a_coef, b_coef, owls_now, mouses_now):
     return (a_coef*owls_now + b_coef*mouses_now*owls_now)
 #@return new amount of mouses    
-def mouse(a_coef, b_coef, mouses_now, owls_now):
-    return (a_coef*mouses_now - b_coef*mouses_now*owls_now)
+def mouse(a_coef, b_coef, mouses_now, owls_now, time):
+    if time % 10 == 0:
+        return (a_coef*mouses_now - b_coef*mouses_now*owls_now - mouses_now*0.5)
+    else:
+        return (a_coef*mouses_now - b_coef*mouses_now*owls_now)
 
 def plot(owls,mouses,owl_coef, mouse_coef):    
     plt.figure(1)
@@ -74,7 +74,7 @@ for scenario in range(len(owls_init)):
                     
                     for time in range(times):
                         owls.append( owl(owl_coef, owl_coef_b, owls[time], mouses[time]) )
-                        mouses.append( mouse(mouse_coef, mouse_coef_b, mouses[time], owls[time]) )
+                        mouses.append( mouse(mouse_coef, mouse_coef_b, mouses[time], owls[time], time) )
                     if(extinction_check(owls) or extinction_check(mouses)):
                         print("THE POPULATION WAS EXTENDED")
                     else:
